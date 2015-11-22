@@ -1,5 +1,5 @@
 // - - - - -
-// ESPDMX - A Arduino library for sending and receiving DMX using the builtin serial hardware port.
+// ESPDMX - A Arduino library for sending DMX signals using the built-in serial hardware port.
 // ESPDMX.cpp: Library implementation file
 //
 // Copyright (C) 2015  Rick <ricardogg95@gmail.com>
@@ -7,7 +7,7 @@
 //
 // Last change: Marcel Seerig <https://github.com/mseerig>
 //
-// Documentation and samples are available at https://github.com/Rickgg/ESP-Dmx
+// more information: https://github.com/Rickgg/ESP-Dmx
 // - - - - -
 
 /* ----- LIBRARIES ----- */
@@ -40,6 +40,12 @@ void DMXESPSerial::init() {
   dmxStarted = true;
 }
 
+// Change Serial1 Pin if TX Pin is not Pin 2
+void DMXESPSerial::setSendPin(int _pin) {
+  if (dmxStarted == false) init();
+  sendPin = _pin;
+}
+/*
 // Function to read DMX data
 uint8_t DMXESPSerial::read(int Channel) {
   if (dmxStarted == false) init();
@@ -48,6 +54,7 @@ uint8_t DMXESPSerial::read(int Channel) {
   if (Channel > dmxMaxChannel) Channel = dmxMaxChannel;
   return(dmxData[Channel]);
 }
+*/
 
 // Function to send DMX data
 void DMXESPSerial::write(int Channel, uint8_t value) {

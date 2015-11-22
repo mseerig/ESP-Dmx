@@ -15,6 +15,7 @@ DMXESPSerial dmx;
 
 void setup() {
   dmx.init();               // initialization
+  //dmx.setSendPin(1);		// Change TX pin to 1 (for example Arduino Leonardo)
   delay(200);               // wait a while (not necessary)
 }
 

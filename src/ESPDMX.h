@@ -7,7 +7,7 @@
 //
 // Last change: Marcel Seerig <https://github.com/mseerig>
 //
-// Documentation and samples are available at https://github.com/Rickgg/ESP-Dmx
+// more information: https://github.com/Rickgg/ESP-Dmx
 // - - - - -
 
 #ifndef ESPDMX_h
@@ -20,7 +20,8 @@
 class DMXESPSerial {
 public:
   void init(); 
-  uint8_t read(int Channel);
+  //uint8_t read(int Channel);
+  void setSendPin(int _pin); // to change the Serial1 Pin
   void write(int channel, uint8_t value); //Write a value to a specific channel
   void update();
 };
