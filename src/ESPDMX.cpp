@@ -18,8 +18,6 @@
 
 #define DMXSPEED       250000
 #define DMXFORMAT      SERIAL_8N2
-#define BREAKSPEED     83333
-#define BREAKFORMAT    SERIAL_8N1
 
 bool dmxStarted = false;
 int sendPin = 2;		//dafault on ESP8266
@@ -35,7 +33,7 @@ void DMXESPSerial::init() {
   for (int iR=0; iR < dmxMaxChannel; iR++) {
     dmxData[iR] = 0;
   }
-  Serial1.begin(DMXSPEED);
+  Serial1.begin(DMXSPEED, DMXFORMAT);
   pinMode(sendPin, OUTPUT);
   dmxStarted = true;
 }
@@ -73,13 +71,12 @@ void DMXESPSerial::update() {
   if (dmxStarted == false) init();
   
   //Send break
-  digitalWrite(sendPin, HIGH);
-  Serial1.begin(BREAKSPEED, BREAKFORMAT);
-  Serial1.write(0);
-  Serial1.flush();
+  analogWrite(sendPin, 0);
+  delay(1);
+  analogWrite(sendPin, 255);
+  delay(1);
   
   //send data
-  Serial1.begin(DMXSPEED, DMXFORMAT);
   digitalWrite(sendPin, LOW);
   Serial1.write(dmxData, sizeof(dmxData));
   Serial1.flush();
