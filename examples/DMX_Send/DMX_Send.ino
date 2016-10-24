@@ -17,7 +17,7 @@ DMXESPSerial dmx;
 
 void setup() {
   dmx.init();               // initialization for first 32 addresses by default
-  //dmx.init(512)           // initialization for complete bus
+  //dmx.init(512);           // initialization for complete bus
   delay(200);               // wait a while (not necessary)
 }
 
